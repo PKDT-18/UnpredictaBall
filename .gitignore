@@ -1,0 +1,19 @@
+# JetBrains
+.idea
+cmake-build*
+
+# Build
+build
+*.o
+
+# Executables
+*.exe
+*.out
+
+# Release
+pong
+craypong
+*.zip
+
+.vscode/*.log
+*.tmp
