@@ -6,12 +6,12 @@ The players will have up, down, left, and right movements with an invisible bord
 UnpredictaBall aims to be a fun side game for two that will test your skills and more so your luck. 
 
 # Feature
-Player Movement: UnpredictaBall is a two-player tennis-like game. Player 1 controls their racket using the WASD keys, while Player 2 uses the arrow keys. Both players can move up, down, left, and right within the court, with invisible boundaries preventing them from leaving the playing area. Their objective is to hit the ball toward their opponent's side of the court.
+• Player Movement: UnpredictaBall is a two-player tennis-like game. Player 1 controls their racket using the WASD keys, while Player 2 uses the arrow keys. Both players can move up, down, left, and right within the court, with invisible boundaries preventing them from leaving the playing area. Their objective is to hit the ball toward their opponent's side of the court.
 
-Ball Mechanics: The ball moves across the court based on its trajectory and interaction with the players' rackets. It bounces upon hitting the rackets or court boundaries. Its movement may randomly accelerate, decelerate, temporarily stop, or change direction, making each rally unpredictable.
+• Ball Mechanics: The ball moves across the court based on its trajectory and interaction with the players' rackets. It bounces upon hitting the rackets or court boundaries. Its movement may randomly accelerate, decelerate, temporarily stop, or change direction, making each rally unpredictable.
 
-Power-Up System: Buff and debuff orbs spawn randomly within the court at five-second intervals. The game randomly determines which type of orb appears, while players decide whether to pursue and collect them. Upon collection, an orb activates a temporary effect that may provide an advantage or impose a disadvantage during gameplay.
+• Power-Up System: Buff and debuff orbs spawn randomly within the court at five-second intervals. The game randomly determines which type of orb appears, while players decide whether to pursue and collect them. Upon collection, an orb activates a temporary effect that may provide an advantage or impose a disadvantage during gameplay.
 
-Scoring System: A point is awarded when a player fails to return the ball or commits an out-of-bounds error. The score is updated accordingly, and the ball is reset to its starting position for the next rally.
+• Scoring System: A point is awarded when a player fails to return the ball or commits an out-of-bounds error. The score is updated accordingly, and the ball is reset to its starting position for the next rally.
 
-Match Progression: The game continues through multiple rallies until one player reaches three points. The player who reaches the target score first is declared the winner.
+• Match Progression: The game continues through multiple rallies until one player reaches three points. The player who reaches the target score first is declared the winner.
