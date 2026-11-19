@@ -15,3 +15,16 @@ UnpredictaBall aims to be a fun side game for two that will test your skills and
 • Scoring System: A point is awarded when a player fails to return the ball or commits an out-of-bounds error. The score is updated accordingly, and the ball is reset to its starting position for the next rally.
 
 • Match Progression: The game continues through multiple rallies until one player reaches three points. The player who reaches the target score first is declared the winner.
+
+# Credits and Acknowlegment
+This project is based on Craypong, an existing open-source game licensed under the GNU General Public License v3.0 (GPL-3.0).
+
+Our team has modified and expanded the original source code to develop UnpredictaBall, including changes to its gameplay mechanics, features, visuals, and overall design.
+
+The original copyright notices have been retained. Our modifications are distributed under the terms of GPL-3.0.
+
+# License
+This project is distributed under the GNU General Public License v3.0. See the LICENSE file for the complete license terms.
+
+• Original Project: https://github.com/Valentin271/craypong.git
+• Modifications By: Team First to Three
