@@ -5,7 +5,7 @@ REM Version 1.1
 set W_RAYLIB_SRC_PATH="..\raylib\src"
 
 REM Get current working directory
-set W_PROJECT_NAME=craypong
+set W_PROJECT_NAME=UnpredictaBall
 set W_PROJECT_DIR=%cd%
 set W_BUILD_DIR="build\%W_PROJECT_NAME%_win"
 

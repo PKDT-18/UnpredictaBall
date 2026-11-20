@@ -29,7 +29,7 @@
 PLATFORM              ?= PLATFORM_DESKTOP
 
 # Define project variables
-PROJECT_NAME          ?= craypong
+PROJECT_NAME          ?= UnpredictaBall
 PROJECT_VERSION       ?= 1.0
 SOURCES_PATH          ?= src
 
@@ -315,7 +315,7 @@ ifeq ($(PLATFORM),PLATFORM_DESKTOP)
     ifeq ($(PLATFORM_OS),WINDOWS)
         # Libraries for Windows desktop compilation
         # NOTE: WinMM library required to set high-res timer resolution
-        LDLIBS = -lraylib -lopengl32 -lgdi32 -lwinmm
+        LDLIBS = -lraylib -l:libglfw3.dll.a -lopengl32 -lgdi32 -lwinmm
         # Required for physac examples
         LDLIBS += -static -lpthread
     endif

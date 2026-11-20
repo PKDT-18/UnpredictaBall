@@ -5,7 +5,7 @@ set -euo pipefail
 
 L_RAYLIB_SRC_PATH="../raylib/src"
 
-L_PROJECT_NAME="craypong"
+L_PROJECT_NAME="UnpredictaBall"
 L_PROJECT_PATH="$(pwd)"
 L_ARCHIVE_NAME="${L_PROJECT_NAME}_linux"
 L_BUILD_DIR="build/${L_ARCHIVE_NAME}"
