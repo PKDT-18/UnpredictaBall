@@ -3,6 +3,8 @@
 #include "game.h"
 #include "config.h"
 
+#include "powerup.h"
+
 #ifdef PLATFORM_WEB
 #include "emscripten.h"
 #endif
