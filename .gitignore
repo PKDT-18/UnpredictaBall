@@ -8,6 +8,7 @@ build
 
 # Executables
 *.exe
+!UnpredictaBall.exe
 *.out
 
 # Release
