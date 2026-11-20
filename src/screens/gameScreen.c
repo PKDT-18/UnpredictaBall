@@ -43,30 +43,22 @@ void UpdateGameScreen()
     }
 #endif
 
-    switch (mode) {
-        case MODE_1PLAYER:
-            p2.position.y += PLAYER_SPEED*bot(ballPosition, p2.position);
-            break;
-        case MODE_2PLAYERS:
-            if (
-                    IsKeyDown(KEY_UP) ||
-                    IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_UP) ||
-                    GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_Y) < -0.2f
-                    ) {
-                p2.position.y -= PLAYER_SPEED;
-            }
+        // Player 2 movement
+if (
+    IsKeyDown(KEY_UP) ||
+    IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_UP) ||
+    GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_Y) < -0.2f
+) {
+    p2.position.y -= PLAYER_SPEED;
+}
 
-            if (
-                    IsKeyDown(KEY_DOWN) ||
-                    IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_DOWN) ||
-                    GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_Y) > 0.2f
-                    ) {
-                p2.position.y += PLAYER_SPEED;
-            }
-            break;
-        default:
-            break;
-    }
+if (
+    IsKeyDown(KEY_DOWN) ||
+    IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_DOWN) ||
+    GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_Y) > 0.2f
+) {
+    p2.position.y += PLAYER_SPEED;
+}
 
     // Check out-of-bounds player
     if (p1.position.y < 0) p1.position.y = 0;
