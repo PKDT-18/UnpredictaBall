@@ -13,5 +13,9 @@ void UpdatePauseScreen()
 
 void DrawPauseScreen()
 {
-    DrawText("Pause", TextCenterX("Pause", 50), TextCenterY(50), 50, GRAY);
+    DrawText("Pause", TextCenterX("Pause", 10), TextCenterY(10), 50, WHITE);
+    DrawText("Resume", TextCenterX("Resume", 20), TextCenterY(10), 50, WHITE);
+    DrawText("Restart", TextCenterX("Restart", 30), TextCenterY(10), 50, WHITE);
+    DrawText("Main Menu", TextCenterX("Main Menu", 40), TextCenterY(10), 50, WHITE);
+    DrawText("Exit", TextCenterX("Exit", 50), TextCenterY(10), 50, WHITE);
 }
