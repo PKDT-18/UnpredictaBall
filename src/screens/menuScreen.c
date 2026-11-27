@@ -59,15 +59,23 @@ void UpdateMenuScreen(void)
     {
         if (CheckCollisionPointRec(mousePosition, howToPlayButton))
             screen = SCREEN_HOW_TO_PLAY;
-        else if (CheckCollisionPointRec(mousePosition, playButton))
+       else if (CheckCollisionPointRec(mousePosition, playButton))
+         {
+            p1.score = 0;
+            p2.score = 0;
             screen = SCREEN_GAME;
+        }
         else if (CheckCollisionPointRec(mousePosition, exitButton))
             CloseWindow();
     }
 
     // Keyboard shortcuts
     if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_P))
-        screen = SCREEN_GAME;
+{
+    p1.score = 0;
+    p2.score = 0;
+    screen = SCREEN_GAME;
+}
 }
 
 void DrawMenuScreen(void)

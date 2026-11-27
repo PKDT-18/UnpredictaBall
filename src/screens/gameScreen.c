@@ -158,28 +158,45 @@ void UpdateGameScreen()
 
 
     // Check walls collision for score
-    if ((ballPosition.x >= (GetScreenWidth() - BALLRADIUS))) {
+        if (ballPosition.x >= (GetScreenWidth() - BALLRADIUS)) {
         ++p1.score;
-        ballPosition = (Vector2) {GetScreenWidth()/2.0f, GetScreenHeight()/2.0f};
+        ballPosition = (Vector2) {
+            GetScreenWidth()/2.0f,
+            GetScreenHeight()/2.0f
+        };
 
         ballSpeed = DEFAULT_BALL_SPEED;
         InitBallDirection(&ballDirection, 3*PI/4 + GetRandomValue(0, 1)*PI/2);
 
-        screen = SCREEN_POINT;
-        pauseFrames = POINT_WAIT_FRAME;
         CenterPlayerY(&p1);
         CenterPlayerY(&p2);
-    } else if (ballPosition.x <= BALLRADIUS) {
+
+        if (p1.score >= 3) {
+            screen = SCREEN_GAME_OVER;
+        } else {
+            screen = SCREEN_POINT;
+            pauseFrames = POINT_WAIT_FRAME;
+        }
+
+        } else if (ballPosition.x <= BALLRADIUS) {
         ++p2.score;
-        ballPosition = (Vector2) {GetScreenWidth()/2.0f, GetScreenHeight()/2.0f};
+        ballPosition = (Vector2) {
+            GetScreenWidth()/2.0f,
+            GetScreenHeight()/2.0f
+        };
 
         ballSpeed = DEFAULT_BALL_SPEED;
         InitBallDirection(&ballDirection, -PI/4 + GetRandomValue(0, 1)*PI/2);
 
-        screen = SCREEN_POINT;
-        pauseFrames = POINT_WAIT_FRAME;
         CenterPlayerY(&p1);
         CenterPlayerY(&p2);
+
+        if (p2.score >= 3) {
+            screen = SCREEN_GAME_OVER;
+        } else {
+            screen = SCREEN_POINT;
+            pauseFrames = POINT_WAIT_FRAME;
+        }
     }
 
     // Check walls collision for bouncing

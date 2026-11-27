@@ -40,6 +40,8 @@ void InitGame();
 void UpdateFrame();
 void DrawFrame();
 void UnloadGame();
+void ResetMatch(void);
+
 
 
 //--------------------------------------------------
@@ -63,5 +65,11 @@ void DrawPauseScreen();
 
 void UpdatePointScreen();
 void DrawPointScreen();
+
+void UpdateGameOverScreen(void);
+void DrawGameOverScreen(void);
+
+
+
 
 #endif //CRAYPONG_GAME_H
