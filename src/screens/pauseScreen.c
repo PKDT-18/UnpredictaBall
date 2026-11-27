@@ -47,7 +47,7 @@ void UpdatePauseScreen()
             }
             else if (i == 1)
             {
-                screen = SCREEN_RESTART;
+                RestartGame();
             }
             else if (i == 2)
             {
@@ -98,7 +98,7 @@ void DrawPauseScreen()
         };
 
         Color color = CheckCollisionPointRec(mouse, button)
-                      ? YELLOW
+                      ? GRAY
                       : WHITE;
 
         DrawText(options[i], x, y, fontSize, color);

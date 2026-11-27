@@ -8,6 +8,7 @@ void UpdateGameScreen()
 {
     ++framesCounter;
 
+
     if (
             IsKeyPressed(KEY_ESCAPE) ||
             IsGamepadButtonPressed(0, GAMEPAD_BUTTON_MIDDLE_RIGHT) ||
@@ -20,51 +21,103 @@ void UpdateGameScreen()
     if (IsKeyPressed(KEY_F3)) showDebug = !showDebug;
 
 
+    
     // Player movement
-    if (
-            IsKeyDown(KEY_W) ||
-            IsKeyDown(KEY_Z) ||
-            IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_UP) ||
-            GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_Y) < -0.2f
-            ) {
+    float centerX = GetScreenWidth() / 2.0f;
+
+    // PLAYER 1: WASD controls
+    if (IsKeyDown(KEY_W) ||
+        IsKeyDown(KEY_Z) ||
+        IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_UP) ||
+        GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_Y) < -0.2f)
+    {
         p1.position.y -= PLAYER_SPEED;
     }
-    if (
-            IsKeyDown(KEY_S) ||
-            IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_DOWN) ||
-            GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_Y) > 0.2f
-            ) {
+
+    if (IsKeyDown(KEY_S) ||
+        IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_DOWN) ||
+        GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_Y) > 0.2f)
+    {
         p1.position.y += PLAYER_SPEED;
     }
 
+    if (IsKeyDown(KEY_A) ||
+        IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_LEFT) ||
+        GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_X) < -0.2f)
+    {
+        p1.position.x -= PLAYER_SPEED;
+    }
+
+    if (IsKeyDown(KEY_D) ||
+        IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_RIGHT) ||
+        GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_X) > 0.2f)
+    {
+        p1.position.x += PLAYER_SPEED;
+    }
+
+    // PLAYER 2: Arrow key controls
+    if (IsKeyDown(KEY_UP) ||
+        IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_UP) ||
+        GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_Y) < -0.2f)
+    {
+        p2.position.y -= PLAYER_SPEED;
+    }
+
+    if (IsKeyDown(KEY_DOWN) ||
+        IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_DOWN) ||
+        GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_Y) > 0.2f)
+    {
+        p2.position.y += PLAYER_SPEED;
+    }
+
+    if (IsKeyDown(KEY_LEFT) ||
+        IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_LEFT) ||
+        GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_X) < -0.2f)
+    {
+        p2.position.x -= PLAYER_SPEED;
+    }
+
+    if (IsKeyDown(KEY_RIGHT) ||
+        IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_RIGHT) ||
+        GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_X) > 0.2f)
+    {
+        p2.position.x += PLAYER_SPEED;
+    }
+
+    // PLAYER 1 boundaries: left half
+    if (p1.position.x < 0)
+        p1.position.x = 0;
+
+    if (p1.position.x + playerSize.x > centerX)
+        p1.position.x = centerX - playerSize.x;
+
+    // PLAYER 2 boundaries: right half
+    if (p2.position.x < centerX)
+        p2.position.x = centerX;
+
+    if (p2.position.x + playerSize.x > GetScreenWidth())
+        p2.position.x = GetScreenWidth() - playerSize.x;
+
+    // Vertical boundaries for both players
+    if (p1.position.y < 0)
+        p1.position.y = 0;
+
+    if (p1.position.y + playerSize.y > GetScreenHeight())
+        p1.position.y = GetScreenHeight() - playerSize.y;
+
+    if (p2.position.y < 0)
+        p2.position.y = 0;
+
+    if (p2.position.y + playerSize.y > GetScreenHeight())
+        p2.position.y = GetScreenHeight() - playerSize.y;
+
 #ifdef PLATFORM_WEB
-    if (IsGestureDetected(GESTURE_HOLD) || IsGestureDetected(GESTURE_DRAG)) {
-        p1.position.y = GetTouchPosition(0).y - playerSize.y/2;
+    if (IsGestureDetected(GESTURE_HOLD) ||
+        IsGestureDetected(GESTURE_DRAG))
+    {
+        p1.position.y = GetTouchPosition(0).y - playerSize.y / 2;
     }
 #endif
-
-        // Player 2 movement
-if (
-    IsKeyDown(KEY_UP) ||
-    IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_UP) ||
-    GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_Y) < -0.2f
-) {
-    p2.position.y -= PLAYER_SPEED;
-}
-
-if (
-    IsKeyDown(KEY_DOWN) ||
-    IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_DOWN) ||
-    GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_Y) > 0.2f
-) {
-    p2.position.y += PLAYER_SPEED;
-}
-
-    // Check out-of-bounds player
-    if (p1.position.y < 0) p1.position.y = 0;
-    if (p1.position.y + playerSize.y > GetScreenHeight()) p1.position.y = GetScreenHeight() - playerSize.y;
-    if (p2.position.y < 0) p2.position.y = 0;
-    if (p2.position.y + playerSize.y > GetScreenHeight()) p2.position.y = GetScreenHeight() - playerSize.y;
 
 
     // Ball mouvement
@@ -168,4 +221,5 @@ void DrawGameScreen()
         DrawFPS(10, 10);
         DrawText(TextFormat("%.3f ms", GetFrameTime()*1000.0f), 10, 30, 20, RAYWHITE);
     }
-}
+
+}                                                               

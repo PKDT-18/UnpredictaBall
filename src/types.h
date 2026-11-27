@@ -17,8 +17,7 @@ typedef enum SCREEN {
     SCREEN_GAME,
     SCREEN_PAUSE,
     SCREEN_POINT,
-    SCREEN_GAME_OVER,
-    SCREEN_RESTART
+    SCREEN_GAME_OVER
 } SCREEN;
 
 typedef enum MODE {

@@ -48,6 +48,9 @@ void UnloadGame();
 void UpdateWelcomeScreen(void);
 void DrawWelcomeScreen(void);
 
+void UpdateHowToPlayScreen(void);
+void DrawHowToPlayScreen(void);
+
 void UpdateMenuScreen();
 void DrawMenuScreen();
 
@@ -57,8 +60,7 @@ void DrawGameScreen();
 void UpdatePauseScreen();
 void DrawPauseScreen();
 
-void UpdateRestartScreen();
-void DrawRestartScreen();
+void RestartGame(void);
 
 void UpdatePointScreen();
 void DrawPointScreen();

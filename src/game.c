@@ -51,6 +51,7 @@ void UpdateFrame()
             break;
 
         case SCREEN_HOW_TO_PLAY:
+            UpdateHowToPlayScreen();
             break;
 
         case SCREEN_GAME:
@@ -66,10 +67,6 @@ void UpdateFrame()
             break;
 
         case SCREEN_GAME_OVER:
-            break;
-
-        case SCREEN_RESTART:
-            UpdateRestartScreen();
             break;
 
         default:
@@ -89,6 +86,7 @@ void DrawFrame()
             break;
 
         case SCREEN_HOW_TO_PLAY:
+            DrawHowToPlayScreen();
             break;
 
         case SCREEN_GAME:
@@ -117,4 +115,9 @@ void UnloadGame()
 {
     UnloadSound(playerBeep);
     UnloadSound(wallBeep);
+}
+
+void RestartGame()
+{
+    InitGame();
 }
