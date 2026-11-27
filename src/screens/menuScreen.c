@@ -11,10 +11,12 @@ Rectangle exitButton;
 Rectangle menuHeading;
 Rectangle backButton;
 
+
 void UpdateMenuScreen(void)
 {
     int screenWidth = GetScreenWidth();
     int screenHeight = GetScreenHeight();
+    
 
     // Main Menu heading
     menuHeading = (Rectangle) {
@@ -77,8 +79,6 @@ void DrawMenuScreen(void)
     int screenWidth = GetScreenWidth();
     int screenHeight = GetScreenHeight();
 
-    
-
     // Game title
     const char *title = "UNPREDICTABALL";
     int titleSize = 52;
@@ -104,7 +104,7 @@ void DrawMenuScreen(void)
     );
 
     // Main Menu heading
-    DrawRectangleLinesEx(menuHeading, 2, BLACK);
+/*    DrawRectangleLinesEx(menuHeading, 2, BLACK);
 
     const char *heading = "MAIN MENU";
     int headingSize = (int)(screenWidth * 0.021f);
@@ -117,7 +117,7 @@ void DrawMenuScreen(void)
             headingSize / 2,
         headingSize,
         BLACK
-    );
+    );*/
 
     // Button labels and positions
     const char *labels[] = {

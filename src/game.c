@@ -5,7 +5,7 @@
 void InitGame()
 {
     screen = SCREEN_WELCOME;
-    mode = MODE_1PLAYER;
+    mode = MODE_2PLAYERS;
     framesCounter = 1;
 
     showDebug = false;
@@ -66,6 +66,10 @@ void UpdateFrame()
             break;
 
         case SCREEN_GAME_OVER:
+            break;
+
+        case SCREEN_RESTART:
+            UpdateRestartScreen();
             break;
 
         default:

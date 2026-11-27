@@ -9,7 +9,6 @@
 #include "types.h"
 #include "utils.h"
 #include "screens/welcomeScreen.h"
-#include "bot.h"
 
 
 //--------------------------------------------------
@@ -57,6 +56,9 @@ void DrawGameScreen();
 
 void UpdatePauseScreen();
 void DrawPauseScreen();
+
+void UpdateRestartScreen();
+void DrawRestartScreen();
 
 void UpdatePointScreen();
 void DrawPointScreen();

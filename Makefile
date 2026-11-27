@@ -375,13 +375,13 @@ endif
 PROJECT_SOURCE_FILES ?= \
     main.c \
     game.c \
-    bot.c \
     utils.c \
     screens/gameScreen.c \
     screens/welcomeScreen.c \
     screens/menuScreen.c \
     screens/pauseScreen.c \
-    screens/pointScreen.c
+    screens/pointScreen.c \
+    screens/restartScreen.c 
 
 # Define all object files from source files
 OBJS = $(patsubst %.c, $(SOURCES_PATH)/%.o, $(PROJECT_SOURCE_FILES))
