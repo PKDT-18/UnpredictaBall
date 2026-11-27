@@ -211,32 +211,94 @@ void UpdateGameScreen()
     }
 }
 
+
 void DrawGameScreen()
 {
-    // Drawing ball
+    int screenWidth = GetScreenWidth();
+    int screenHeight = GetScreenHeight();
+
+    // Black background
+    ClearBackground(BLACK);
+
+    // Player labels
+    const char *player1Label = "PLAYER 1";
+    const char *player2Label = "PLAYER 2";
+
+    DrawText(player1Label, 18, 14, 16, WHITE);
+
+    DrawText(
+        player2Label,
+        screenWidth - MeasureText(player2Label, 16) - 18,
+        14,
+        16,
+        WHITE
+    );
+
+    // Scoreboard
+    const char *score1 = TextFormat("%d", p1.score);
+    const char *score2 = TextFormat("%d", p2.score);
+
+    int scoreSize = 30;
+    int vsSize = 30;
+
+    DrawText(
+        score1,
+        screenWidth / 2 - 110 - MeasureText(score1, scoreSize) / 2,
+        10,
+        scoreSize,
+        WHITE
+    );
+
+    DrawText(
+        "VS",
+        screenWidth / 2 - MeasureText("VS", vsSize) / 2,
+        10,
+        vsSize,
+        WHITE
+    );
+
+    DrawText(
+        score2,
+        screenWidth / 2 + 110 - MeasureText(score2, scoreSize) / 2,
+        10,
+        scoreSize,
+        WHITE
+    );
+
+    // Dotted center divider
+    int centerX = screenWidth / 2;
+
+    for (int y = 67; y < screenHeight - 80; y += 7)
+    {
+        DrawCircle(centerX, y, 1.5f, WHITE);
+    }
+
+    // Drawing ball (unchanged)
     DrawCircleV(ballPosition, BALLRADIUS, WHITE);
 
-    // Drawing players
+    // Drawing players / paddles (UNCHANGED)
     DrawRectangleV(p1.position, playerSize, WHITE);
     DrawRectangleV(p2.position, playerSize, WHITE);
 
-    // Drawing separation line
-    DrawLine(GetScreenWidth()/2, 0, GetScreenWidth()/2, GetScreenHeight(), WHITE);
+    // Pause label
+    const char *pauseLabel = "PAUSE ||";
+    int pauseSize = 12;
 
-    // Drawing scores
     DrawText(
-            TextFormat("%d", p1.score),
-            GetScreenWidth()/2 - 20 - MeasureText(TextFormat("%d", p1.score), 60),
-            10,
-            60,
-            WHITE
+        pauseLabel,
+        screenWidth / 2 - MeasureText(pauseLabel, pauseSize) / 2,
+        screenHeight - 64,
+        pauseSize,
+        WHITE
     );
-    DrawText(TextFormat("%d", p2.score), GetScreenWidth()/2 + 20, 10, 60, WHITE);
 
     // Drawing debug
-    if (showDebug) {
-        DrawFPS(10, 10);
-        DrawText(TextFormat("%.3f ms", GetFrameTime()*1000.0f), 10, 30, 20, RAYWHITE);
+    if (showDebug)
+    {
+        DrawFPS(10, 30);
+        DrawText(
+            TextFormat("%.3f ms", GetFrameTime() * 1000.0f),
+            10, 50, 20, RAYWHITE
+        );
     }
-
-}                                                               
+}
