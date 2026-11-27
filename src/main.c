@@ -47,6 +47,8 @@ int main()
     SetTraceLogLevel(LOG_NONE);
 #endif
 
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+
     // Initialization
     //---------------------------------------------------------
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "UnpredictaBall");

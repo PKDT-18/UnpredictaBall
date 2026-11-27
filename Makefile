@@ -376,6 +376,7 @@ PROJECT_SOURCE_FILES ?= \
     main.c \
     game.c \
     utils.c \
+    powerup.c \
     screens/gameScreen.c \
     screens/welcomeScreen.c \
     screens/menuScreen.c \

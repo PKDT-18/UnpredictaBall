@@ -1,5 +1,5 @@
-#ifndef CRAYPONG_CONFIG_H
-#define CRAYPONG_CONFIG_H
+#ifndef UNPREDICTABALL_CONFIG_H
+#define UNPREDICTABALL_CONFIG_H
 
 #include "math.h"
 
@@ -26,5 +26,4 @@
 
 static const Vector2 playerSize = {10.0f, 70.0f};
 
-
-#endif //CRAYPONG_CONFIG_H
+#endif //UNPREDICTABALL_CONFIG_H

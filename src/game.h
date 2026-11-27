@@ -1,5 +1,5 @@
-#ifndef CRAYPONG_GAME_H
-#define CRAYPONG_GAME_H
+#ifndef UNPREDICTABALL_GAME_H
+#define UNPREDICTABALL_GAME_H
 
 #include "stdbool.h"
 #include "math.h"
@@ -10,6 +10,7 @@
 #include "utils.h"
 #include "screens/welcomeScreen.h"
 
+#include "powerup.h"
 
 //--------------------------------------------------
 // Shared variables
@@ -31,6 +32,11 @@ extern float ballSpeed;
 // sounds
 extern Sound playerBeep, wallBeep;
 
+//powerup system
+extern PowerupSystem powerupSystem;
+extern PowerupPlayer powerupPlayers[2];
+extern PowerupBall powerupBall;
+extern PowerupOrb powerupOrb;
 
 //--------------------------------------------------
 // Game functions
@@ -62,12 +68,10 @@ void DrawGameScreen();
 void UpdatePauseScreen();
 void DrawPauseScreen();
 
-void RestartGame(void);
-
 void UpdatePointScreen();
 void DrawPointScreen();
 
 void UpdateGameOverScreen(void);
 void DrawGameOverScreen(void);
 
-#endif //CRAYPONG_GAME_H
+#endif //UNPREDICTABALL_GAME_H

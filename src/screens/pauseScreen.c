@@ -47,7 +47,7 @@ void UpdatePauseScreen()
             }
             else if (i == 1)
             {
-                RestartGame();
+                ResetMatch();
             }
             else if (i == 2)
             {

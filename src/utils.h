@@ -1,5 +1,5 @@
-#ifndef CRAYPONG_UTILS_H
-#define CRAYPONG_UTILS_H
+#ifndef UNPREDICTABALL_UTILS_H
+#define UNPREDICTABALL_UTILS_H
 
 #include "math.h"
 
@@ -42,4 +42,4 @@ void InitBallDirection(Vector2 *dir, float angle);
  */
 void CenterPlayerY(Player *player);
 
-#endif //CRAYPONG_UTILS_H
+#endif //UNPREDICTABALL_UTILS_H

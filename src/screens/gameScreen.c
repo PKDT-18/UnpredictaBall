@@ -1,8 +1,6 @@
 #include "../game.h"
 
-
 static float bounceAngle, ballRelativeY;
-
 
 void UpdateGameScreen()
 {
@@ -20,7 +18,7 @@ void UpdateGameScreen()
 
     if (IsKeyPressed(KEY_F3)) showDebug = !showDebug;
 
-
+    PowerupOrb_Update(&powerupOrb, GetFrameTime());
     
     // Player movement
     float centerX = GetScreenWidth() / 2.0f;
@@ -275,6 +273,19 @@ void DrawGameScreen()
 
     // Drawing ball (unchanged)
     DrawCircleV(ballPosition, BALLRADIUS, WHITE);
+
+    // Draw power-up orb
+    if (powerupOrb.active)
+    {
+        Color orbColor = (powerupOrb.type <= EXTENDED_RACKET) ? GREEN : RED;
+
+        DrawCircleV(
+            powerupOrb.position,
+            powerupOrb.radius,
+            orbColor
+        );
+    }
+
 
     // Drawing players / paddles (UNCHANGED)
     DrawRectangleV(p1.position, playerSize, WHITE);

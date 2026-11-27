@@ -1,9 +1,15 @@
-
 #include "game.h"
-#include "screens/welcomeScreen.h"
+
+PowerupSystem powerupSystem;
+PowerupPlayer powerupPlayers[2];
+PowerupBall powerupBall;
+PowerupOrb powerupOrb;
 
 void InitGame()
 {
+    PowerupOrb_Init(&powerupOrb);
+    powerupOrb.spawnTimer = POWERUP_RESPAWN_TIME;
+
     screen = SCREEN_WELCOME;
     mode = MODE_2PLAYERS;
     framesCounter = 1;
@@ -37,10 +43,30 @@ void InitGame()
     // Sounds
     playerBeep = LoadSound("resources/playerBeep.wav");
     wallBeep = LoadSound("resources/wallBeep.wav");
+
+    // Power-ups
+    powerupPlayers[0] = (PowerupPlayer) {
+        PLAYER_SPEED,
+        playerSize.y,
+        PLAYER_SPEED,
+        playerSize.y,
+        0,
+        0
+    };
+
+    powerupPlayers[1] = powerupPlayers[0];
+
+    powerupBall.base_alpha = 1.0f;
+    powerupBall.alpha = 1.0f;
+
+    Powerup_Init(&powerupSystem, powerupPlayers, &powerupBall);
 }
 
 void ResetMatch()
 {
+    PowerupOrb_Init(&powerupOrb);
+    powerupOrb.spawnTimer = POWERUP_RESPAWN_TIME;
+
     // Reset scores and player positions
     p1 = (Player) {
         {10, GetScreenHeight()/2 - playerSize.y/2},
@@ -68,12 +94,19 @@ void ResetMatch()
     framesCounter = 1;
     pauseFrames = 0;
 
+    Powerup_Init(&powerupSystem, powerupPlayers, &powerupBall);
+
     // Start a new match
     screen = SCREEN_GAME;
 }
 
 void UpdateFrame()
 {
+    if (IsKeyPressed(KEY_F11))
+    {
+        ToggleFullscreen();
+    }
+
     switch (screen) {
         case SCREEN_WELCOME:
             UpdateWelcomeScreen();
@@ -149,9 +182,4 @@ void UnloadGame()
 {
     UnloadSound(playerBeep);
     UnloadSound(wallBeep);
-}
-
-void RestartGame()
-{
-    InitGame();
 }

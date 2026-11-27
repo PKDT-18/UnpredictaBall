@@ -1,5 +1,5 @@
-#ifndef CRAYPONG_TYPES_H
-#define CRAYPONG_TYPES_H
+#ifndef UNPREDICTABALL_TYPES_H
+#define UNPREDICTABALL_TYPES_H
 
 #include "stdbool.h"
 #include "raylib.h"
