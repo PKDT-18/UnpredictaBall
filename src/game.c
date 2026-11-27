@@ -5,7 +5,7 @@
 void InitGame()
 {
     screen = SCREEN_WELCOME;
-    mode = MODE_1PLAYER;
+    mode = MODE_2PLAYERS;
     framesCounter = 1;
 
     showDebug = false;
@@ -51,6 +51,7 @@ void UpdateFrame()
             break;
 
         case SCREEN_HOW_TO_PLAY:
+            UpdateHowToPlayScreen();
             break;
 
         case SCREEN_GAME:
@@ -85,6 +86,7 @@ void DrawFrame()
             break;
 
         case SCREEN_HOW_TO_PLAY:
+            DrawHowToPlayScreen();
             break;
 
         case SCREEN_GAME:
