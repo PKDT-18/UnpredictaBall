@@ -252,7 +252,7 @@ endif
 
 # Define library paths containing required libs: LDFLAGS
 #------------------------------------------------------------------------------------------------
-LDFLAGS = -L$(RAYLIB_PATH)/lib
+LDFLAGS = -L$(RAYLIB_PATH)/lib -LC:/raylib/raylib/examples/others/external/lib
 
 ifeq ($(PLATFORM),PLATFORM_DESKTOP)
     ifeq ($(PLATFORM_OS),WINDOWS)
