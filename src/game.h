@@ -49,6 +49,9 @@ void UnloadGame();
 void UpdateWelcomeScreen(void);
 void DrawWelcomeScreen(void);
 
+void UpdateHowToPlayScreen(void);
+void DrawHowToPlayScreen(void);
+
 void UpdateMenuScreen();
 void DrawMenuScreen();
 

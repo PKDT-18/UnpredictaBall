@@ -170,10 +170,10 @@ void DrawMenuScreen(void)
 void UpdateHowToPlayScreen(void)
 {
     backButton = (Rectangle) {
-        GetScreenWidth()/2 - 150,
-        GetScreenHeight() - 110,
-        300,
-        60
+        GetScreenWidth() / 2 - 130,
+        395,
+        260,
+        42
     };
 
     Vector2 mousePosition = GetMousePosition();
@@ -192,55 +192,121 @@ void DrawHowToPlayScreen(void)
 {
     ClearBackground(RAYWHITE);
 
+    int screenWidth = GetScreenWidth();
+
+    // Title
     const char *title = "HOW TO PLAY";
-    int titleSize = 55;
+    int titleSize = 48;
 
     DrawText(
         title,
-        GetScreenWidth()/2 - MeasureText(title, titleSize)/2,
-        70,
+        screenWidth / 2 - MeasureText(title, titleSize) / 2,
+        65,
         titleSize,
         BLACK
     );
 
-    int textSize = 25;
-    int centerX = GetScreenWidth()/2;
+    // Player headings
+    int headingSize = 26;
+    int textSize = 20;
 
-    DrawText("PLAYER 1", centerX - 350, 210, 30, BLACK);
-    DrawText("W - Move Up", centerX - 350, 260, textSize, DARKGRAY);
-    DrawText("S - Move Down", centerX - 350, 300, textSize, DARKGRAY);
-
-    DrawText("PLAYER 2", centerX + 80, 210, 30, BLACK);
-    DrawText("UP ARROW - Move Up", centerX + 80, 260, textSize, DARKGRAY);
-    DrawText("DOWN ARROW - Move Down", centerX + 80, 300, textSize, DARKGRAY);
+    int player1Center = 200;
+    int player2Center = 600;
 
     DrawText(
-        "OBJECTIVE",
-        centerX - MeasureText("OBJECTIVE", 30)/2,
-        390,
-        30,
+        "PLAYER 1",
+        player1Center - MeasureText("PLAYER 1", headingSize) / 2,
+        175,
+        headingSize,
         BLACK
     );
 
-    const char *objective = "Be the first player to score 3 points!";
+    DrawText(
+        "PLAYER 2",
+        player2Center - MeasureText("PLAYER 2", headingSize) / 2,
+        175,
+        headingSize,
+        BLACK
+    );
+
+    // Player 1 controls
+    const char *p1Controls[] = {
+        "W - Move Up",
+        "S - Move Down"
+    };
+
+    // Player 2 controls
+    const char *p2Controls[] = {
+        "UP ARROW - Move Up",
+        "DOWN ARROW - Move Down"
+    };
+
+    for (int i = 0; i < 2; i++)
+    {
+        DrawText(
+            p1Controls[i],
+            player1Center - MeasureText(p1Controls[i], textSize) / 2,
+            225 + i * 35,
+            textSize,
+            DARKGRAY
+        );
+
+        DrawText(
+            p2Controls[i],
+            player2Center - MeasureText(p2Controls[i], textSize) / 2,
+            225 + i * 35,
+            textSize,
+            DARKGRAY
+        );
+    }
+
+    // Objective
+    const char *objectiveTitle = "OBJECTIVE";
+    int objectiveTitleSize = 25;
+
+    DrawText(
+        objectiveTitle,
+        screenWidth / 2 -
+            MeasureText(objectiveTitle, objectiveTitleSize) / 2,
+        310,
+        objectiveTitleSize,
+        BLACK
+    );
+
+    const char *objective =
+        "Be the first player to score 3 points!";
 
     DrawText(
         objective,
-        centerX - MeasureText(objective, textSize)/2,
-        435,
+        screenWidth / 2 -
+            MeasureText(objective, textSize) / 2,
+        345,
         textSize,
         DARKGRAY
     );
 
-    DrawRectangleLinesEx(backButton, 3, BLACK);
+    // Back button
+    bool hovered = CheckCollisionPointRec(
+        GetMousePosition(),
+        backButton
+    );
+
+    if (hovered)
+        DrawRectangleRec(backButton, LIGHTGRAY);
+
+    DrawRectangleLinesEx(backButton, 2, BLACK);
 
     const char *back = "BACK TO MAIN MENU";
+    int backSize = 18;
 
     DrawText(
         back,
-        backButton.x + backButton.width/2 - MeasureText(back, 22)/2,
-        backButton.y + 18,
-        22,
+        backButton.x + backButton.width / 2 -
+            MeasureText(back, backSize) / 2,
+        backButton.y + backButton.height / 2 - backSize / 2,
+        backSize,
         BLACK
     );
 }
+
+    
