@@ -33,7 +33,7 @@ PROJECT_NAME          ?= UnpredictaBall
 PROJECT_VERSION       ?= 1.0
 SOURCES_PATH          ?= src
 
-RAYLIB_PATH           = C:/msys64/ucrt64
+RAYLIB_PATH           = C:/raylib/w64devkit
 
 # Locations of raylib.h and libraylib.a/libraylib.so
 # NOTE: Those variables are only used for PLATFORM_OS: LINUX, BSD
@@ -252,7 +252,7 @@ endif
 
 # Define library paths containing required libs: LDFLAGS
 #------------------------------------------------------------------------------------------------
-LDFLAGS = -L$(RAYLIB_PATH)/lib
+LDFLAGS = -L$(RAYLIB_PATH)/lib -LC:/raylib/raylib/examples/others/external/lib
 
 ifeq ($(PLATFORM),PLATFORM_DESKTOP)
     ifeq ($(PLATFORM_OS),WINDOWS)
@@ -315,7 +315,7 @@ ifeq ($(PLATFORM),PLATFORM_DESKTOP)
     ifeq ($(PLATFORM_OS),WINDOWS)
         # Libraries for Windows desktop compilation
         # NOTE: WinMM library required to set high-res timer resolution
-        LDLIBS = -lraylib -l:libglfw3.dll.a -lopengl32 -lgdi32 -lwinmm
+        LDLIBS = -lraylib -lglfw3 -lopengl32 -lgdi32 -lwinmm
         # Required for physac examples
         LDLIBS += -static -lpthread
     endif
