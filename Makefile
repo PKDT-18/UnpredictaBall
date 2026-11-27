@@ -380,7 +380,8 @@ PROJECT_SOURCE_FILES ?= \
     screens/welcomeScreen.c \
     screens/menuScreen.c \
     screens/pauseScreen.c \
-    screens/pointScreen.c 
+    screens/pointScreen.c \
+    screens/gameOverScreen.c
 
 # Define all object files from source files
 OBJS = $(patsubst %.c, $(SOURCES_PATH)/%.o, $(PROJECT_SOURCE_FILES))

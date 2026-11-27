@@ -39,6 +39,39 @@ void InitGame()
     wallBeep = LoadSound("resources/wallBeep.wav");
 }
 
+void ResetMatch()
+{
+    // Reset scores and player positions
+    p1 = (Player) {
+        {10, GetScreenHeight()/2 - playerSize.y/2},
+        0,
+        false
+    };
+
+    p2 = (Player) {
+        {GetScreenWidth() - playerSize.x - 10,
+         GetScreenHeight()/2 - playerSize.y/2},
+        0,
+        false
+    };
+
+    // Reset ball
+    ballPosition = (Vector2) {
+        GetScreenWidth()/2,
+        GetScreenHeight()/2
+    };
+
+    ballSpeed = DEFAULT_BALL_SPEED;
+    InitBallDirection(&ballDirection, -PI/4 + GetRandomValue(0, 1)*PI/2);
+
+    // Reset game counters
+    framesCounter = 1;
+    pauseFrames = 0;
+
+    // Start a new match
+    screen = SCREEN_GAME;
+}
+
 void UpdateFrame()
 {
     switch (screen) {
@@ -67,7 +100,8 @@ void UpdateFrame()
             break;
 
         case SCREEN_GAME_OVER:
-            break;
+        UpdateGameOverScreen();
+        break;
 
         default:
             break;
@@ -104,8 +138,8 @@ void DrawFrame()
             break;
 
         case SCREEN_GAME_OVER:
-            break;
-
+        DrawGameOverScreen();
+        break;
         default:
             break;
     }
