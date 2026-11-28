@@ -22,64 +22,69 @@ void UpdateGameScreen()
     
     // Player movement
     float centerX = GetScreenWidth() / 2.0f;
+    int invert1 = powerupPlayers[0].invert_controls ? -1 : 1;
+    int invert2 = powerupPlayers[1].invert_controls ? -1 : 1;
 
     // PLAYER 1: WASD controls
-    if (IsKeyDown(KEY_W) ||
-        IsKeyDown(KEY_Z) ||
-        IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_UP) ||
-        GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_Y) < -0.2f)
-    {
-        p1.position.y -= PLAYER_SPEED;
-    }
+    if (!powerupPlayers[0].frozen) {
+        if (IsKeyDown(KEY_W) || IsKeyDown(KEY_Z) ||
+            IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_UP) ||
+            GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_Y) < -0.2f)
+        {
+            p1.position.y -= powerupPlayers[0].speed * invert1;
+        }
 
-    if (IsKeyDown(KEY_S) ||
-        IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_DOWN) ||
-        GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_Y) > 0.2f)
-    {
-        p1.position.y += PLAYER_SPEED;
-    }
+        if (IsKeyDown(KEY_S) ||
+            IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_DOWN) ||
+            GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_Y) > 0.2f)
+        {
+            p1.position.y += powerupPlayers[0].speed * invert1;
+        }
 
-    if (IsKeyDown(KEY_A) ||
-        IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_LEFT) ||
-        GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_X) < -0.2f)
-    {
-        p1.position.x -= PLAYER_SPEED;
-    }
+        if (IsKeyDown(KEY_A) ||
+            IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_LEFT) ||
+            GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_X) < -0.2f)
+        {
+            p1.position.x -= powerupPlayers[0].speed * invert1;
+        }
 
-    if (IsKeyDown(KEY_D) ||
-        IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_RIGHT) ||
-        GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_X) > 0.2f)
-    {
-        p1.position.x += PLAYER_SPEED;
+        if (IsKeyDown(KEY_D) ||
+            IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_RIGHT) ||
+            GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_X) > 0.2f)
+        {
+            p1.position.x += powerupPlayers[0].speed * invert1;
+        }
     }
 
     // PLAYER 2: Arrow key controls
-    if (IsKeyDown(KEY_UP) ||
-        IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_UP) ||
-        GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_Y) < -0.2f)
-    {
-        p2.position.y -= PLAYER_SPEED;
-    }
+    if (!powerupPlayers[1].frozen) {
+        if (IsKeyDown(KEY_UP) ||
+            IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_UP) ||
+            GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_Y) < -0.2f)
+        {
+            p2.position.y -= powerupPlayers[1].speed * invert2;
+        }
 
-    if (IsKeyDown(KEY_DOWN) ||
-        IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_DOWN) ||
-        GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_Y) > 0.2f)
-    {
-        p2.position.y += PLAYER_SPEED;
-    }
+        if (IsKeyDown(KEY_DOWN) ||
+            IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_DOWN) ||
+            GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_Y) > 0.2f)
+        {
+            p2.position.y += powerupPlayers[1].speed * invert2;
+        }
 
-    if (IsKeyDown(KEY_LEFT) ||
-        IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_LEFT) ||
-        GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_X) < -0.2f)
-    {
-        p2.position.x -= PLAYER_SPEED;
-    }
+        if (IsKeyDown(KEY_LEFT) ||
+            IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_LEFT) ||
+            GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_X) < -0.2f)
+        {
+            p2.position.x -= powerupPlayers[1].speed * invert2;
+        }
 
-    if (IsKeyDown(KEY_RIGHT) ||
-        IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_RIGHT) ||
-        GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_X) > 0.2f)
-    {
-        p2.position.x += PLAYER_SPEED;
+        if (IsKeyDown(KEY_RIGHT) ||
+            IsGamepadButtonDown(1, GAMEPAD_BUTTON_LEFT_FACE_RIGHT) ||
+            GetGamepadAxisMovement(1, GAMEPAD_AXIS_LEFT_X) > 0.2f)
+        {
+            p2.position.x += powerupPlayers[1].speed * invert2;
+        }
     }
 
     // PLAYER 1 boundaries: left half
@@ -96,18 +101,31 @@ void UpdateGameScreen()
     if (p2.position.x + playerSize.x > GetScreenWidth())
         p2.position.x = GetScreenWidth() - playerSize.x;
 
+    // Keep racket centers consistent when size changes
+    static float previousSize1 = 70.0f;
+    static float previousSize2 = 70.0f;
+
+    float currentSize1 = powerupPlayers[0].size;
+    float currentSize2 = powerupPlayers[1].size;
+
+    p1.position.y -= (currentSize1 - previousSize1) / 2.0f;
+    p2.position.y -= (currentSize2 - previousSize2) / 2.0f;
+
+    previousSize1 = currentSize1;
+    previousSize2 = currentSize2;
+
     // Vertical boundaries for both players
     if (p1.position.y < 0)
         p1.position.y = 0;
 
-    if (p1.position.y + playerSize.y > GetScreenHeight())
-        p1.position.y = GetScreenHeight() - playerSize.y;
+    if (p1.position.y + currentSize1 > GetScreenHeight())
+        p1.position.y = GetScreenHeight() - currentSize1;
 
     if (p2.position.y < 0)
         p2.position.y = 0;
 
-    if (p2.position.y + playerSize.y > GetScreenHeight())
-        p2.position.y = GetScreenHeight() - playerSize.y;
+    if (p2.position.y + currentSize2 > GetScreenHeight())
+        p2.position.y = GetScreenHeight() - currentSize2;
 
 #ifdef PLATFORM_WEB
     if (IsGestureDetected(GESTURE_HOLD) ||
@@ -117,42 +135,110 @@ void UpdateGameScreen()
     }
 #endif
 
+// Check power-up orb collision
+if (powerupOrb.active)
+{
+    Rectangle player1Rect = {
+    p1.position.x,
+    p1.position.y,
+    playerSize.x,
+    powerupPlayers[0].size
+};
 
-    // Ball mouvement
+Rectangle player2Rect = {
+    p2.position.x,
+    p2.position.y,
+    playerSize.x,
+    powerupPlayers[1].size
+};
+
+    if (CheckCollisionCircleRec(
+        powerupOrb.position,
+        powerupOrb.radius,
+        player1Rect))
+    {
+        Powerup_Collect(
+            &powerupSystem,
+            0,
+            powerupOrb.type,
+            powerupPlayers,
+            &powerupBall
+        );
+
+        powerupOrb.active = false;
+        powerupOrb.spawnTimer = POWERUP_RESPAWN_TIME;
+    }
+    else if (CheckCollisionCircleRec(
+        powerupOrb.position,
+        powerupOrb.radius,
+        player2Rect))
+    {
+        Powerup_Collect(
+            &powerupSystem,
+            1,
+            powerupOrb.type,
+            powerupPlayers,
+            &powerupBall
+        );
+
+        powerupOrb.active = false;
+        powerupOrb.spawnTimer = POWERUP_RESPAWN_TIME;
+    }
+}
+
+    // Ball movement
     ballPosition.x += ballDirection.x;
     ballPosition.y += ballDirection.y;
 
-    // Ball collisions with player
-    p1.colliding = CheckCollisionCircleRec(
-            ballPosition, BALLRADIUS,
-            (Rectangle) {p1.position.x, p1.position.y, playerSize.x, playerSize.y}
-    );
-    p2.colliding = CheckCollisionCircleRec(
-            ballPosition, BALLRADIUS,
-            (Rectangle) {p2.position.x, p2.position.y, playerSize.x, playerSize.y}
-    );
-
-    if (p1.colliding) {
-        PlaySound(playerBeep);
-
-        ballRelativeY = ballPosition.y - (p1.position.y + playerSize.y/2);
-        bounceAngle = ballRelativeY*MAX_BOUNCE_ANGLE/(playerSize.y/2);
-
-        ballDirection.x = cosf(bounceAngle)*ballSpeed;
-        ballDirection.y = sinf(bounceAngle)*ballSpeed;
-
-        ballPosition.x = p1.position.x + playerSize.x + BALLRADIUS;
-    } else if (p2.colliding) {
-        PlaySound(playerBeep);
-
-        ballRelativeY = ballPosition.y - (p2.position.y + playerSize.y/2);
-        bounceAngle = ballRelativeY*MAX_BOUNCE_ANGLE/(playerSize.y/2);
-
-        ballDirection.x = -cosf(bounceAngle)*ballSpeed;
-        ballDirection.y = sinf(bounceAngle)*ballSpeed;
-
-        ballPosition.x = p2.position.x - BALLRADIUS;
+// Ball collisions with player
+p1.colliding = CheckCollisionCircleRec(
+    ballPosition, BALLRADIUS,
+    (Rectangle) {
+        p1.position.x,
+        p1.position.y,
+        playerSize.x,
+        powerupPlayers[0].size
     }
+);
+
+p2.colliding = CheckCollisionCircleRec(
+    ballPosition, BALLRADIUS,
+    (Rectangle) {
+        p2.position.x,
+        p2.position.y,
+        playerSize.x,
+        powerupPlayers[1].size
+    }
+);
+
+if (p1.colliding) {
+    PlaySound(playerBeep);
+
+    ballRelativeY = ballPosition.y -
+        (p1.position.y + powerupPlayers[0].size / 2);
+
+    bounceAngle = ballRelativeY * MAX_BOUNCE_ANGLE /
+        (powerupPlayers[0].size / 2);
+
+    ballDirection.x = cosf(bounceAngle) * ballSpeed;
+    ballDirection.y = sinf(bounceAngle) * ballSpeed;
+
+    ballPosition.x = p1.position.x + playerSize.x + BALLRADIUS;
+
+} else if (p2.colliding) {
+    PlaySound(playerBeep);
+
+    ballRelativeY = ballPosition.y -
+        (p2.position.y + powerupPlayers[1].size / 2);
+
+    bounceAngle = ballRelativeY * MAX_BOUNCE_ANGLE /
+        (powerupPlayers[1].size / 2);
+
+    ballDirection.x = -cosf(bounceAngle) * ballSpeed;
+    ballDirection.y = sinf(bounceAngle) * ballSpeed;
+
+    ballPosition.x = p2.position.x - BALLRADIUS;
+}
 
 
     // Check walls collision for score
@@ -271,8 +357,8 @@ void DrawGameScreen()
         DrawCircle(centerX, y, 1.5f, WHITE);
     }
 
-    // Drawing ball (unchanged)
-    DrawCircleV(ballPosition, BALLRADIUS, WHITE);
+    // Drawing ball
+    DrawCircleV(ballPosition, BALLRADIUS, Fade(WHITE, powerupBall.alpha));
 
     // Draw power-up orb
     if (powerupOrb.active)
@@ -287,9 +373,22 @@ void DrawGameScreen()
     }
 
 
-    // Drawing players / paddles (UNCHANGED)
-    DrawRectangleV(p1.position, playerSize, WHITE);
-    DrawRectangleV(p2.position, playerSize, WHITE);
+    // Drawing players / paddles
+    DrawRectangle(
+        p1.position.x,
+        p1.position.y,
+        playerSize.x,
+        powerupPlayers[0].size,
+        WHITE
+    );
+
+    DrawRectangle(
+        p2.position.x,
+        p2.position.y,
+        playerSize.x,
+        powerupPlayers[1].size,
+        WHITE
+    );
 
     // Pause label
     const char *pauseLabel = "PAUSE ||";
